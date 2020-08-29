@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
         if (inputSpacePressed && _timestampLastShot + _fireRate < Time.time)
         {
             _ = Instantiate(_prefabLaser,
-                        transform.position + new Vector3(0, 0.8f, 0),
+                        transform.position + new Vector3(0, 1.05f, 0),
                         Quaternion.identity);
             _timestampLastShot = Time.time;
         }
