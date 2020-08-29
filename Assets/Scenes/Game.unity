@@ -155,6 +155,7 @@ MonoBehaviour:
   _player: {fileID: 5889725366079339254, guid: 43eb411926a7aa643b6c85cfa80edb80, type: 3}
   _enemy: {fileID: -4564314873954866210, guid: b6f0c01f4de7c044fb149ee73f74b6c2, type: 3}
   _enemyContainer: {fileID: 2036524632}
+  _powerUp: {fileID: 7086802381340892411, guid: 682b8d40412b99d45a9c69194368a492, type: 3}
 --- !u!4 &183202631
 Transform:
   m_ObjectHideFlags: 0

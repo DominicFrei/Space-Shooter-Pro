@@ -72,15 +72,33 @@ public class Player : MonoBehaviour
         {
             if (_isTripleShotActive)
             {
-                _ = Instantiate(_prefabTripleShot, transform.position, Quaternion.identity);
+                _ = Instantiate(_prefabTripleShot,
+                                transform.position,
+                                Quaternion.identity);
             }
             else
             {
                 _ = Instantiate(_prefabLaser,
-                        transform.position + new Vector3(0, 1.05f, 0),
-                        Quaternion.identity);
+                                transform.position + new Vector3(0, 1.05f, 0),
+                                Quaternion.identity);
             }
             _timestampLastShot = Time.time;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PowerUp"))
+        {
+            _isTripleShotActive = true;
+            Destroy(collision.gameObject);
+            StartCoroutine(DeactivatePowerUp());
+        }
+    }
+
+    private IEnumerator DeactivatePowerUp()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isTripleShotActive = false;
     }
 }
