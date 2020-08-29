@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lifes: 3
   _prefabLaser: {fileID: 3638303841597702479, guid: aa4ef9e121225c54eac1a7e77ba5eb75, type: 3}
+  _prefabTripleShot: {fileID: 8610645469858146072, guid: 28f4765feab96da4189f4fa5840d92e0, type: 3}
 --- !u!61 &5889725366079339147
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -6,10 +6,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private int _lifes = 3;
-    [SerializeField] private Laser _prefabLaser;
+    [SerializeField] private Laser _prefabLaser = null;
+    [SerializeField] private GameObject _prefabTripleShot = null;
     private readonly float _speed = 3.5f;
     private readonly float _fireRate = 0.25f;
     private float _timestampLastShot = 0.0f;
+    [SerializeReference] private bool _isTripleShotActive = false;
 
     void Update()
     {
@@ -68,9 +70,16 @@ public class Player : MonoBehaviour
         bool inputSpacePressed = Input.GetKeyDown(KeyCode.Space);
         if (inputSpacePressed && _timestampLastShot + _fireRate < Time.time)
         {
-            _ = Instantiate(_prefabLaser,
+            if (_isTripleShotActive)
+            {
+                _ = Instantiate(_prefabTripleShot, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                _ = Instantiate(_prefabLaser,
                         transform.position + new Vector3(0, 1.05f, 0),
                         Quaternion.identity);
+            }
             _timestampLastShot = Time.time;
         }
     }

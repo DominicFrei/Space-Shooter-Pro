@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private Enemy _enemy;
-    [SerializeField] private GameObject _enemyContainer;
+    [SerializeField] private Player _player = null;
+    [SerializeField] private Enemy _enemy = null;
+    [SerializeField] private GameObject _enemyContainer = null;
     //private readonly float _spawnRate = 1.5f;
     //private float _timestampLastSpawn = 0.0f;
     private readonly WaitForSeconds _delay = new WaitForSeconds(1.5f);
