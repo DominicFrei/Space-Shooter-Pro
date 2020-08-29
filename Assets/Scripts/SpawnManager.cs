@@ -16,14 +16,14 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnEnemies());
     }
 
-    void Update()
-    {
-        //if (Time.time > _timestampLastSpawn + _spawnRate)
-        //{
-        //    Instantiate(_enemy);
-        //    _timestampLastSpawn = Time.time;
-        //}
-    }
+    //void Update()
+    //{
+    //    if (Time.time > _timestampLastSpawn + _spawnRate)
+    //    {
+    //        Instantiate(_enemy);
+    //        _timestampLastSpawn = Time.time;
+    //    }
+    //}
 
     private IEnumerator SpawnEnemies()
     {
