@@ -30,12 +30,9 @@ public class SpawnManager : MonoBehaviour
         while (null != _player && _player.IsAlive())
         {
             Enemy enemy = Instantiate(_enemy);
-            Debug.Log("Enemy spawned.");
             enemy.transform.parent = _enemyContainer.transform;
             yield return _delay;
         }
-
-        Debug.Log("Stopped spawning.");
     }
 
 }
