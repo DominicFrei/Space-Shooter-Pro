@@ -8,11 +8,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _speed = 4.0f;
     private readonly float _boundsUpper = 6.2f;
     private readonly float _boundsLower = -6.4f;
+    [SerializeField] private Animator _animator = null;
 
     private void Start()
     {
         float newX = Random.Range(-8.0f, 8.0f);
         transform.position = new Vector3(newX, _boundsUpper, 0);
+        _animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -42,7 +44,9 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            Destroy(gameObject);
+            _animator.SetTrigger("OnEnemyDeath");
+            _speed = 0.0f;
+            Destroy(gameObject, 2.8f);
 
         }
         else if (other.CompareTag("Laser"))
@@ -51,8 +55,10 @@ public class Enemy : MonoBehaviour
             {
                 _player.EnemyKilled();
             }
+            _animator.SetTrigger("OnEnemyDeath");
+            _speed = 0.0f;
             Destroy(other.gameObject);
-            Destroy(gameObject);
+            Destroy(gameObject, 2.8f);
         }
     }
 
