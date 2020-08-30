@@ -41,7 +41,6 @@ public class Player : MonoBehaviour
         float positionY = transform.position.y;
 
         transform.position = new Vector3(positionX, Mathf.Clamp(positionY, boundsLower, boundsUpper), 0);
-        //transform.position = new Vector3(positionX, Mathf.Max(Mathf.Min(positionY, boundsUpper), boundsLower), 0);
 
         if (positionX > boundsRight)
         {
