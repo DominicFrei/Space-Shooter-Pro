@@ -11,9 +11,10 @@ public class Player : MonoBehaviour
     private readonly float _speed = 3.5f;
     private readonly float _fireRate = 0.25f;
     private float _timestampLastShot = 0.0f;
-    [SerializeReference] private bool _isTripleShotActive = false;
-    [SerializeReference] private float _speedBoost = 1.0f;
-    [SerializeReference] private bool _isShieldActive = false;
+    [SerializeField] private bool _isTripleShotActive = false;
+    [SerializeField] private float _speedBoost = 1.0f;
+    [SerializeField] private bool _isShieldActive = false;
+    [SerializeField] private GameObject _shield = null;
 
     void Update()
     {
@@ -62,6 +63,7 @@ public class Player : MonoBehaviour
         if (_isShieldActive)
         {
             _isShieldActive = false;
+            _shield.SetActive(false);
         }
         else
         {
@@ -108,7 +110,7 @@ public class Player : MonoBehaviour
         {
             _isShieldActive = true;
             Destroy(collision.gameObject);
-            StartCoroutine(DeactivateShieldPowerUp());
+            _shield.SetActive(true);
         }
     }
 
@@ -124,9 +126,4 @@ public class Player : MonoBehaviour
         _speedBoost = 1.0f;
     }
 
-    private IEnumerator DeactivateShieldPowerUp()
-    {
-        yield return new WaitForSeconds(5.0f);
-        _isShieldActive = false;
-    }
 }
