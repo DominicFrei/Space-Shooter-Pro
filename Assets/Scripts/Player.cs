@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [NonSerialized] private int _score = 0;
     [SerializeField, HideInInspector] private int _highscore = 0;
     [SerializeField] private UIManager _uiManager = null;
+    [SerializeField] private SpawnManager _spawnManager = null;
 
     void Update()
     {

@@ -104,8 +104,9 @@ MonoBehaviour:
   _speedBoost: 1
   _isShieldActive: 0
   _shield: {fileID: 8369934352895741260}
-  _score: 0
+  _highscore: 0
   _uiManager: {fileID: 0}
+  _spawnManager: {fileID: 0}
 --- !u!61 &5889725366079339147
 BoxCollider2D:
   m_ObjectHideFlags: 0

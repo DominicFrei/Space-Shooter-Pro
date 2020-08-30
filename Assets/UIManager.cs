@@ -10,11 +10,14 @@ public class UIManager : MonoBehaviour
     [SerializeField, HideInInspector] private int _highscore = 0;
     [SerializeField] private Sprite[] _sprites = null;
     [SerializeField] private Image _lifes = null;
+    [SerializeField] private Text _gameOverText = null;
+    private WaitForSeconds _gameOverFlickerDelay = new WaitForSeconds(0.25f);
 
     private void Start()
     {
         _scoreText.text = "Score: 0";
         _highscoreText.text = "Highscore: " + PlayerPrefs.GetInt("highscore");
+        _gameOverText.gameObject.SetActive(false);
     }
 
     public void UpdateScore(int score, int highscore)
@@ -33,6 +36,19 @@ public class UIManager : MonoBehaviour
         else
         {
             _lifes.sprite = _sprites[lives];
+            if (0 == lives)
+            {
+                StartCoroutine(ShowGameOver());
+            }
+        }
+    }
+
+    private IEnumerator ShowGameOver()
+    {
+        while (true)
+        {
+            _gameOverText.gameObject.SetActive(!_gameOverText.gameObject.activeSelf);
+            yield return _gameOverFlickerDelay;
         }
     }
 }
