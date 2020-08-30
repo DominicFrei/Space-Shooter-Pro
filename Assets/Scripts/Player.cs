@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -15,6 +16,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speedBoost = 1.0f;
     [SerializeField] private bool _isShieldActive = false;
     [SerializeField] private GameObject _shield = null;
+    [NonSerialized] private int _score = 0;
+    [SerializeField, HideInInspector] private int _highscore = 0;
+    [SerializeField] private UIManager _uiManager = null;
 
     void Update()
     {
@@ -68,6 +72,7 @@ public class Player : MonoBehaviour
         else
         {
             _lifes -= 1;
+            _uiManager.UpdateLives(_lifes);
         }
         if (_lifes == 0)
         {
@@ -124,6 +129,25 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         _speedBoost = 1.0f;
+    }
+
+    public void EnemyKilled()
+    {
+        _score += 10;
+        _highscore = Math.Max(_highscore, _score);
+        PlayerPrefs.SetInt("highscore", _highscore);
+
+        UIManager uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        uiManager.UpdateScore(_score, _highscore);
+
+        //if (null != _uiManager)
+        //{
+        //    _uiManager.UpdateScore(_score);
+        //}
+        //else
+        //{
+        //    Debug.LogError(this + ": _uiManager in Player is null!");
+        //}
     }
 
 }

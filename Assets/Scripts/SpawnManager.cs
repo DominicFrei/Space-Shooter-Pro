@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -14,8 +12,8 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnEnemies());
-        StartCoroutine(SpawnPowerUp());
+        _ = StartCoroutine(SpawnEnemies());
+        _ = StartCoroutine(SpawnPowerUp());
     }
 
     private IEnumerator SpawnEnemies()
@@ -33,7 +31,7 @@ public class SpawnManager : MonoBehaviour
         while (null != _player && _player.IsAlive())
         {
             yield return _delayPowerUp;
-            int randomPowerUpId = UnityEngine.Random.Range(0, 3);
+            int randomPowerUpId = Random.Range(0, 3);
             GameObject powerUp = _powerUps[randomPowerUpId];
             if (null != powerUp)
             {

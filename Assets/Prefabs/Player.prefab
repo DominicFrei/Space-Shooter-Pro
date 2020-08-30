@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5889725366079339255}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 8369934352895741263}
@@ -104,6 +104,8 @@ MonoBehaviour:
   _speedBoost: 1
   _isShieldActive: 0
   _shield: {fileID: 8369934352895741260}
+  _score: 0
+  _uiManager: {fileID: 0}
 --- !u!61 &5889725366079339147
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -209,7 +211,8 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 5889725366079339254}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6515946743458392590, guid: 6b37714c7b5e14d488a36be0b7cb3ea4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6b37714c7b5e14d488a36be0b7cb3ea4, type: 3}
 --- !u!1 &8369934352895741260 stripped
 GameObject:
