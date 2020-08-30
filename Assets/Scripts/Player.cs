@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     private readonly float _fireRate = 0.25f;
     private float _timestampLastShot = 0.0f;
     [SerializeReference] private bool _isTripleShotActive = false;
+    [SerializeReference] private float _speedBoost = 1.0f;
+    [SerializeReference] private bool _isShieldActive = false;
 
     void Update()
     {
@@ -28,8 +30,8 @@ public class Player : MonoBehaviour
 
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
-        float deltaX = inputX * Time.deltaTime * _speed;
-        float deltaY = inputY * Time.deltaTime * _speed;
+        float deltaX = inputX * Time.deltaTime * _speed * _speedBoost;
+        float deltaY = inputY * Time.deltaTime * _speed * _speedBoost;
 
         Vector3 delta = new Vector3(deltaX, deltaY, 0);
 
@@ -58,7 +60,14 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        _lifes -= 1;
+        if (_isShieldActive)
+        {
+            _isShieldActive = false;
+        }
+        else
+        {
+            _lifes -= 1;
+        }
         if (_lifes == 0)
         {
             Destroy(this.gameObject);
@@ -72,15 +81,11 @@ public class Player : MonoBehaviour
         {
             if (_isTripleShotActive)
             {
-                _ = Instantiate(_prefabTripleShot,
-                                transform.position,
-                                Quaternion.identity);
+                _ = Instantiate(_prefabTripleShot, transform.position, Quaternion.identity);
             }
             else
             {
-                _ = Instantiate(_prefabLaser,
-                                transform.position + new Vector3(0, 1.05f, 0),
-                                Quaternion.identity);
+                _ = Instantiate(_prefabLaser, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
             }
             _timestampLastShot = Time.time;
         }
@@ -88,17 +93,41 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PowerUp"))
+        if (collision.CompareTag("TripleShotPowerUp"))
         {
             _isTripleShotActive = true;
             Destroy(collision.gameObject);
-            StartCoroutine(DeactivatePowerUp());
+            StartCoroutine(DeactivateTripleShotPowerUp());
+        }
+        else if (collision.CompareTag("SpeedPowerUp"))
+        {
+            _speedBoost = 2.0f;
+            Destroy(collision.gameObject);
+            StartCoroutine(DeactivateSpeedPowerUp());
+        }
+        else if (collision.CompareTag("ShieldPowerUp"))
+        {
+            _isShieldActive = true;
+            Destroy(collision.gameObject);
+            StartCoroutine(DeactivateShieldPowerUp());
         }
     }
 
-    private IEnumerator DeactivatePowerUp()
+    private IEnumerator DeactivateTripleShotPowerUp()
     {
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
+    }
+
+    private IEnumerator DeactivateSpeedPowerUp()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _speedBoost = 1.0f;
+    }
+
+    private IEnumerator DeactivateShieldPowerUp()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isShieldActive = false;
     }
 }
