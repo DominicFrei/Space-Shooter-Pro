@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     [NonSerialized] private int _score = 0;
     [SerializeField, HideInInspector] private int _highscore = 0;
     [SerializeField] private UIManager _uiManager = null;
-    [SerializeField] private SpawnManager _spawnManager = null;
     [SerializeField] private GameObject _rightEngine = null;
     [SerializeField] private GameObject _leftEngine = null;
 

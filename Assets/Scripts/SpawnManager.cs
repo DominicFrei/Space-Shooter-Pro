@@ -7,7 +7,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private Enemy _enemy = null;
     [SerializeField] private GameObject _enemyContainer = null;
     [SerializeField] private GameObject[] _powerUps = null;
-    private readonly WaitForSeconds _delayEnemy = new WaitForSeconds(1.5f);
+    private readonly WaitForSeconds _delayEnemy = new WaitForSeconds(3.5f);
     private readonly WaitForSeconds _delayPowerUp = new WaitForSeconds(10.0f);
 
     public void StartSpawning()
