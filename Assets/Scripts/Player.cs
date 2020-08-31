@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     [SerializeField, HideInInspector] private int _highscore = 0;
     [SerializeField] private UIManager _uiManager = null;
     [SerializeField] private SpawnManager _spawnManager = null;
+    [SerializeField] private GameObject _rightEngine = null;
+    [SerializeField] private GameObject _leftEngine = null;
 
     void Update()
     {
@@ -75,9 +77,23 @@ public class Player : MonoBehaviour
             _lifes -= 1;
             _uiManager.UpdateLives(_lifes);
         }
-        if (_lifes == 0)
+        switch (_lifes)
         {
-            Destroy(this.gameObject);
+            case 3:
+                _rightEngine.SetActive(false);
+                _leftEngine.SetActive(false);
+                break;
+            case 2:
+                _rightEngine.SetActive(true);
+                _leftEngine.SetActive(false);
+                break;
+            case 1:
+                _rightEngine.SetActive(true);
+                _leftEngine.SetActive(true);
+                break;
+            case 0:
+                Destroy(this.gameObject);
+                break;
         }
     }
 
