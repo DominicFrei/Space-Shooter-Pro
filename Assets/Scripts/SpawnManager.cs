@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     private readonly WaitForSeconds _delayEnemy = new WaitForSeconds(1.5f);
     private readonly WaitForSeconds _delayPowerUp = new WaitForSeconds(10.0f);
 
-    private void Start()
+    public void StartSpawning()
     {
         _ = StartCoroutine(SpawnEnemies());
         _ = StartCoroutine(SpawnPowerUp());
