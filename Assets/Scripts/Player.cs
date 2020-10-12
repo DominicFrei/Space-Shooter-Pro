@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _rightEngine = null;
     [SerializeField] private GameObject _leftEngine = null;
     [SerializeField] private AudioClip _laserSoundClip = null;
+    [SerializeField] private AudioClip _powerUpSoundClip = null;
     [SerializeField] private AudioSource _audioSource = null;
 
     [SerializeField, HideInInspector] private int _highscore = 0;
@@ -125,18 +126,24 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("TripleShotPowerUp"))
         {
             _isTripleShotActive = true;
+            _audioSource.clip = _powerUpSoundClip;
+            _audioSource.Play(); 
             Destroy(collision.gameObject);
             StartCoroutine(DeactivateTripleShotPowerUp());
         }
         else if (collision.CompareTag("SpeedPowerUp"))
         {
             _speedBoost = 2.0f;
+            _audioSource.clip = _powerUpSoundClip;
+            _audioSource.Play(); 
             Destroy(collision.gameObject);
             StartCoroutine(DeactivateSpeedPowerUp());
         }
         else if (collision.CompareTag("ShieldPowerUp"))
         {
             _isShieldActive = true;
+            _audioSource.clip = _powerUpSoundClip;
+            _audioSource.Play(); 
             Destroy(collision.gameObject);
             _shield.SetActive(true);
         }

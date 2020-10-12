@@ -8,6 +8,7 @@ public class PowerUp : MonoBehaviour
     private readonly float _boundsUpper = 6.2f;
     private readonly float _boundsLower = -6.4f;
 
+
     private void Start()
     {
         float newX = Random.Range(-8.0f, 8.0f);
