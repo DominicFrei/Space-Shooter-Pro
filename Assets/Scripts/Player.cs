@@ -9,18 +9,22 @@ public class Player : MonoBehaviour
     [SerializeField] private int _lifes = 3;
     [SerializeField] private Laser _prefabLaser = null;
     [SerializeField] private GameObject _prefabTripleShot = null;
-    private readonly float _speed = 3.5f;
-    private readonly float _fireRate = 0.25f;
-    private float _timestampLastShot = 0.0f;
     [SerializeField] private bool _isTripleShotActive = false;
     [SerializeField] private float _speedBoost = 1.0f;
     [SerializeField] private bool _isShieldActive = false;
     [SerializeField] private GameObject _shield = null;
-    [NonSerialized] private int _score = 0;
-    [SerializeField, HideInInspector] private int _highscore = 0;
     [SerializeField] private UIManager _uiManager = null;
     [SerializeField] private GameObject _rightEngine = null;
     [SerializeField] private GameObject _leftEngine = null;
+    [SerializeField] private AudioClip _laserSoundClip = null;
+    [SerializeField] private AudioSource _audioSource = null;
+
+    [SerializeField, HideInInspector] private int _highscore = 0;
+    [NonSerialized] private int _score = 0;
+
+    private readonly float _speed = 3.5f;
+    private readonly float _fireRate = 0.25f;
+    private float _timestampLastShot = 0.0f;
 
     void Update()
     {
@@ -110,6 +114,9 @@ public class Player : MonoBehaviour
                 _ = Instantiate(_prefabLaser, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
             }
             _timestampLastShot = Time.time;
+
+            _audioSource.clip = _laserSoundClip;
+            _audioSource.Play();
         }
     }
 

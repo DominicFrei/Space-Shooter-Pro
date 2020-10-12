@@ -4,13 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Shield
   - Enemy
   - Laser
   - TripleShotPowerUp
-  - PowerUp
   - SpeedPowerUp
   - ShieldPowerUp
-  - Shield
   layers:
   - Default
   - TransparentFX
@@ -20,7 +19,7 @@ TagManager:
   - UI
   - 
   - 
-  - Post Processing
+  - 
   - 
   - 
   - 

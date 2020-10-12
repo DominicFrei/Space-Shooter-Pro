@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     private readonly float _boundsUpper = 6.2f;
     private readonly float _boundsLower = -6.4f;
     [SerializeField] private Animator _animator = null;
+    [SerializeField] private GameObject _explosionAudio = null;
 
     private void Start()
     {
@@ -46,6 +47,10 @@ public class Enemy : MonoBehaviour
             }
             _animator.SetTrigger("OnEnemyDeath");
             _speed = 0.0f;
+            if (null != _explosionAudio)
+            {
+                _explosionAudio.GetComponent<AudioSource>().Play();
+            }
             Destroy(gameObject, 2.8f);
 
         }
@@ -57,6 +62,10 @@ public class Enemy : MonoBehaviour
             }
             _animator.SetTrigger("OnEnemyDeath");
             _speed = 0.0f;
+            if (null != _explosionAudio)
+            {
+                _explosionAudio.GetComponent<AudioSource>().Play();
+            }
             Destroy(other.gameObject);
             Destroy(gameObject, 2.8f);
         }
