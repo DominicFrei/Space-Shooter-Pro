@@ -1,26 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    private readonly float _speed = 8.0f;
-    private readonly float _boundsUpper = 8.0f;
+    public bool ShotByPlayer
+    {
+        get
+        {
+            return shotByPlayer;
+        }
+    }
+
+    Vector3 direction = default;
+    bool shotByPlayer = default;
+    readonly float speed = 8.0f;
+    readonly float upperBounds = 8.0f;
+
+    static internal Laser Init(Laser prefab, Vector3 position, Quaternion rotation, Vector3 direction, bool shotByPlayer)
+    {
+        Laser laser = Instantiate(prefab, position, rotation);
+        laser.direction = direction;
+        laser.shotByPlayer = shotByPlayer;
+        return laser;
+    }
 
     void Update()
     {
-        transform.Translate(Vector3.up * Time.deltaTime * _speed);
+        transform.Translate(direction * Time.deltaTime * speed);
 
-        if (transform.position.y > _boundsUpper)
+        if (shotByPlayer)
         {
-            if (null != transform.parent)
+            if (transform.position.y > upperBounds)
             {
-                Destroy(transform.parent.gameObject);
+                DestroySelf();
             }
-            else
+        }
+        else
+        {
+            if (transform.position.y < -upperBounds)
             {
-                Destroy(gameObject);
+                DestroySelf();
             }
+        }
+    }
+
+    void DestroySelf()
+    {
+        if (null != transform.parent)
+        {
+            // This happens in case we fire a triple shot where multiple laser objects are withing a parent object.
+            Destroy(transform.parent.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }

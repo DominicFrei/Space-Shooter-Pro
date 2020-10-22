@@ -7,8 +7,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private int _lifes = 3;
-    [SerializeField] private Laser _prefabLaser = null;
-    [SerializeField] private GameObject _prefabTripleShot = null;
+    [SerializeField] private Laser laser = null;
     [SerializeField] private bool _isTripleShotActive = false;
     [SerializeField] private float _speedBoost = 1.0f;
     [SerializeField] private bool _isShieldActive = false;
@@ -108,11 +107,13 @@ public class Player : MonoBehaviour
         {
             if (_isTripleShotActive)
             {
-                _ = Instantiate(_prefabTripleShot, transform.position, Quaternion.identity);
+                _ = Laser.Init(laser, transform.position + new Vector3(0, 0.9f, 0), default, Vector3.up, true);
+                _ = Laser.Init(laser, transform.position + new Vector3(-0.78f, -0.5f, 0), default, Vector3.up, true);
+                _ = Laser.Init(laser, transform.position + new Vector3(0.78f, -0.5f, 0), default, Vector3.up, true);
             }
             else
             {
-                _ = Instantiate(_prefabLaser, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+                _ = Laser.Init(laser, transform.position + new Vector3(0, 1.05f, 0), default, Vector3.up, true);
             }
             _timestampLastShot = Time.time;
 
@@ -127,7 +128,7 @@ public class Player : MonoBehaviour
         {
             _isTripleShotActive = true;
             _audioSource.clip = _powerUpSoundClip;
-            _audioSource.Play(); 
+            _audioSource.Play();
             Destroy(collision.gameObject);
             StartCoroutine(DeactivateTripleShotPowerUp());
         }
@@ -135,7 +136,7 @@ public class Player : MonoBehaviour
         {
             _speedBoost = 2.0f;
             _audioSource.clip = _powerUpSoundClip;
-            _audioSource.Play(); 
+            _audioSource.Play();
             Destroy(collision.gameObject);
             StartCoroutine(DeactivateSpeedPowerUp());
         }
@@ -143,9 +144,18 @@ public class Player : MonoBehaviour
         {
             _isShieldActive = true;
             _audioSource.clip = _powerUpSoundClip;
-            _audioSource.Play(); 
+            _audioSource.Play();
             Destroy(collision.gameObject);
             _shield.SetActive(true);
+        }
+        else if (collision.CompareTag("Laser"))
+        {
+            Laser laser = collision.gameObject.transform.GetComponent<Laser>();
+            if (!laser.ShotByPlayer)
+            {
+                Damage();
+                Destroy(collision.gameObject);
+            }
         }
     }
 

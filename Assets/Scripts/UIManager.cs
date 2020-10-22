@@ -23,10 +23,14 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
         if (_isGameOver)
         {
-            bool rPressed = Input.GetKeyDown(KeyCode.R);
-            if (rPressed)
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
             }

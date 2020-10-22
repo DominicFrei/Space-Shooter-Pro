@@ -53,6 +53,7 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _explosionAudio: {fileID: 864839226717814494}
   _explosionAudioClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  laser: {fileID: 3638303841597702479, guid: aa4ef9e121225c54eac1a7e77ba5eb75, type: 3}
 --- !u!212 &7965438651168142019
 SpriteRenderer:
   m_ObjectHideFlags: 0
