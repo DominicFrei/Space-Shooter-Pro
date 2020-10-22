@@ -385,7 +385,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1b4a8fdd39d3a45d0a9ee484ad6800ec, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.46925062, g: 0.5126475, b: 0.8962264, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -419,7 +419,8 @@ MonoBehaviour:
   _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _powerUpSoundClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
   _audioSource: {fileID: 7862749254228680599}
-  _highscore: 130
+  gameManager: {fileID: 0}
+  _highscore: 420
 --- !u!61 &5889725366079339147
 BoxCollider2D:
   m_ObjectHideFlags: 0

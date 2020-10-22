@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private Player _player = null;
+    [SerializeField] private Player player1 = null;
+    [SerializeField] private Player player2 = null;
     [SerializeField] private Enemy _enemy = null;
     [SerializeField] private GameObject _enemyContainer = null;
     [SerializeField] private GameObject[] _powerUps = null;
@@ -18,7 +19,7 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
-        while (null != _player && _player.IsAlive())
+        while (null != player1 && player1.IsAlive() || null != player2 && player2.IsAlive())
         {
             Enemy enemy = Instantiate(_enemy);
             enemy.transform.parent = _enemyContainer.transform;
@@ -28,7 +29,7 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnPowerUp()
     {
-        while (null != _player && _player.IsAlive())
+        while (null != player1 && player1.IsAlive() || null != player2 && player2.IsAlive())
         {
             yield return _delayPowerUp;
             int randomPowerUpId = Random.Range(0, 3);

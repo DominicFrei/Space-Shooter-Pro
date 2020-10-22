@@ -9,7 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text _highscoreText = null;
     [SerializeField, HideInInspector] private int _highscore = 0;
     [SerializeField] private Sprite[] _sprites = null;
-    [SerializeField] private Image _lifes = null;
+    [SerializeField] private Image _lifes1 = null;
+    [SerializeField] private Image _lifes2 = null;
     [SerializeField] private Text _gameOverText = null;
     private bool _isGameOver = false;
     private WaitForSeconds _gameOverFlickerDelay = new WaitForSeconds(0.25f);
@@ -44,7 +45,7 @@ public class UIManager : MonoBehaviour
         _highscore = highscore;
     }
 
-    public void UpdateLives(int lives)
+    public void UpdateLives(int playerId, int lives)
     {
         if (lives < 0 || lives > 3)
         {
@@ -52,7 +53,15 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            _lifes.sprite = _sprites[lives];
+            if (playerId == 1)
+            {
+                _lifes1.sprite = _sprites[lives];
+            }
+            else
+            {
+                _lifes2.sprite = _sprites[lives];
+            }
+            
             if (0 == lives)
             {
                 _isGameOver = true;

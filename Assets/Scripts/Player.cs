@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip _laserSoundClip = null;
     [SerializeField] private AudioClip _powerUpSoundClip = null;
     [SerializeField] private AudioSource _audioSource = null;
+    [SerializeField] private GameManager gameManager = default;
+    [SerializeField] private int playerId = default;
 
     [SerializeField, HideInInspector] private int _highscore = 0;
     [NonSerialized] private int _score = 0;
@@ -25,6 +27,14 @@ public class Player : MonoBehaviour
     private readonly float _speed = 3.5f;
     private readonly float _fireRate = 0.25f;
     private float _timestampLastShot = 0.0f;
+
+    private void Start()
+    {
+        if (GameManager.IsMultiplayerSet)
+        {
+            transform.position = Vector3.zero;
+        }
+    }
 
     void Update()
     {
@@ -39,14 +49,45 @@ public class Player : MonoBehaviour
         float boundsRight = 11.3f;
         float boundsLeft = -boundsRight;
 
-        float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
-        float deltaX = inputX * Time.deltaTime * _speed * _speedBoost;
-        float deltaY = inputY * Time.deltaTime * _speed * _speedBoost;
+        if (1 == playerId)
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                transform.Translate(Vector3.up * _speed * _speedBoost * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                transform.Translate(Vector3.down * _speed * _speedBoost * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.Translate(Vector3.left * _speed * _speedBoost * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.Translate(Vector3.right * _speed * _speedBoost * Time.deltaTime);
+            }
+        }
 
-        Vector3 delta = new Vector3(deltaX, deltaY, 0);
-
-        transform.Translate(delta);
+        if (2 == playerId)
+        {
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                transform.Translate(Vector3.up * _speed * _speedBoost * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                transform.Translate(Vector3.down * _speed * _speedBoost * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.Translate(Vector3.left * _speed * _speedBoost * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Translate(Vector3.right * _speed * _speedBoost * Time.deltaTime);
+            }
+        }
 
         float positionX = transform.position.x;
         float positionY = transform.position.y;
@@ -78,7 +119,7 @@ public class Player : MonoBehaviour
         else
         {
             _lifes -= 1;
-            _uiManager.UpdateLives(_lifes);
+            _uiManager.UpdateLives(playerId, _lifes);
         }
         switch (_lifes)
         {
@@ -102,7 +143,7 @@ public class Player : MonoBehaviour
 
     private void SpawnLaser()
     {
-        bool inputSpacePressed = Input.GetKeyDown(KeyCode.Space);
+        bool inputSpacePressed = playerId == 1 ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown(KeyCode.Return);
         if (inputSpacePressed && _timestampLastShot + _fireRate < Time.time)
         {
             if (_isTripleShotActive)
