@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private AudioClip _explosionAudioClip = default;
     [SerializeField] private Laser laser = default;
 
+    private bool isAlive = true;
     private readonly float _boundsUpper = 6.2f;
     private readonly float _boundsLower = -6.4f;
 
@@ -41,7 +42,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (isAlive && other.CompareTag("Player"))
         {
             Player player = other.gameObject.transform.GetComponent<Player>();
             if (null != player)
@@ -55,10 +56,11 @@ public class Enemy : MonoBehaviour
                 _explosionAudio.clip = _explosionAudioClip;
                 _explosionAudio.Play();
             }
+            isAlive = false;
             Destroy(gameObject, 2.8f);
 
         }
-        else if (other.CompareTag("Laser"))
+        else if (isAlive && other.CompareTag("Laser"))
         {
             Laser laser = other.gameObject.transform.GetComponent<Laser>();
             if (laser.ShotByPlayer)
@@ -76,6 +78,7 @@ public class Enemy : MonoBehaviour
                 }
                 Destroy(GetComponent<Collider2D>());
                 Destroy(other.gameObject);
+                isAlive = false;
                 Destroy(gameObject, 2.8f);
             }
         }
@@ -87,9 +90,13 @@ public class Enemy : MonoBehaviour
         {
             WaitForSeconds laserSpawnRate = new WaitForSeconds(Random.Range(2.0f, 5.0f));
             yield return laserSpawnRate;
-            _ = Laser.Init(laser, transform.position + new Vector3(-1.03f, -0.378f, 0), Quaternion.identity, Vector3.down, false);
-            _ = Laser.Init(laser, transform.position + new Vector3(1.03f, -0.378f, 0), Quaternion.identity, Vector3.down, false);
+            if (isAlive)
+            {
+                _ = Laser.Init(laser, transform.position + new Vector3(-0.5f, -0.378f, 0), Quaternion.identity, Vector3.down, false);
+                _ = Laser.Init(laser, transform.position + new Vector3(0.5f, -0.378f, 0), Quaternion.identity, Vector3.down, false);
+            }
         }
+
     }
 
 }

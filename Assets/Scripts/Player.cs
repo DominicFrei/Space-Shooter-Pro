@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip _laserSoundClip = null;
     [SerializeField] private AudioClip _powerUpSoundClip = null;
     [SerializeField] private AudioSource _audioSource = null;
-    [SerializeField] private GameManager gameManager = default;
     [SerializeField] private int playerId = default;
 
     [SerializeField, HideInInspector] private int _highscore = 0;
@@ -38,8 +37,15 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        UpdateMovement();
-        SpawnLaser();
+        if (GameManager.isOnePlayerDead)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            UpdateMovement();
+            SpawnLaser();
+        }
     }
 
     private void UpdateMovement()
@@ -136,7 +142,8 @@ public class Player : MonoBehaviour
                 _leftEngine.SetActive(true);
                 break;
             case 0:
-                Destroy(this.gameObject);
+                GameManager.isOnePlayerDead = true;
+                Destroy(gameObject);
                 break;
         }
     }
