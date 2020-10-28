@@ -37,9 +37,7 @@ public class Player : MonoBehaviour
             {
                 gameObject.SetActive(false);
             }
-            
         }
-
     }
 
     void Update()
@@ -234,15 +232,6 @@ public class Player : MonoBehaviour
 
         UIManager uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         uiManager.UpdateScore(_score, _highscore);
-
-        //if (null != _uiManager)
-        //{
-        //    _uiManager.UpdateScore(_score);
-        //}
-        //else
-        //{
-        //    Debug.LogError(this + ": _uiManager in Player is null!");
-        //}
     }
 
 }

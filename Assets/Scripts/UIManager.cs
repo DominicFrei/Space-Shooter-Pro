@@ -7,7 +7,6 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Text _scoreText = null;
     [SerializeField] private Text _highscoreText = null;
-    [SerializeField, HideInInspector] private int _highscore = 0;
     [SerializeField] private Sprite[] _sprites = null;
     [SerializeField] private Image _lifes1 = null;
     [SerializeField] private Image _lifes2 = null;
@@ -47,7 +46,6 @@ public class UIManager : MonoBehaviour
     {
         _scoreText.text = "Score: " + score;
         _highscoreText.text = "Highscore: " + highscore;
-        _highscore = highscore;
     }
 
     public void UpdateLives(int playerId, int lives)
