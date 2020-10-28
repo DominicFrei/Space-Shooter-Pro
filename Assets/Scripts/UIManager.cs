@@ -20,6 +20,10 @@ public class UIManager : MonoBehaviour
         _scoreText.text = "Score: 0";
         _highscoreText.text = "Highscore: " + PlayerPrefs.GetInt("highscore");
         _gameOverText.gameObject.SetActive(false);
+        if (!GameManager.IsMultiplayerSet)
+        {
+            _lifes2.gameObject.SetActive(false);
+        }
     }
 
     private void Update()
@@ -62,7 +66,7 @@ public class UIManager : MonoBehaviour
             {
                 _lifes2.sprite = _sprites[lives];
             }
-            
+
             if (0 == lives)
             {
                 _isGameOver = true;
