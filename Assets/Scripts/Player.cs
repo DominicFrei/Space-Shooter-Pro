@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -27,12 +25,21 @@ public class Player : MonoBehaviour
     private readonly float _fireRate = 0.25f;
     private float _timestampLastShot = 0.0f;
 
-    private void Start()
+    void Start()
     {
-        if (GameManager.IsMultiplayerSet)
+        if (!GameManager.IsMultiplayerSet)
         {
-            transform.position = Vector3.zero;
+            if (1 == playerId)
+            {
+                transform.position = new Vector3(0.0f, -3.0f, 0.0f);
+            }
+            else if (2 == playerId)
+            {
+                gameObject.SetActive(false);
+            }
+            
         }
+
     }
 
     void Update()
