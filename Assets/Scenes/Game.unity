@@ -949,11 +949,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 750817203, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -100
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 750817203, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 750817203, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
       propertyPath: m_AnchorMin.y
@@ -962,6 +962,14 @@ PrefabInstance:
     - target: {fileID: 750817203, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 750817203, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 750817203, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 750817204, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
       propertyPath: m_FontData.m_Alignment
@@ -1057,11 +1065,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1745169514740573705, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1745169514740573705, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1745169514740573705, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1078,6 +1086,14 @@ PrefabInstance:
     - target: {fileID: 1745169514740573705, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745169514740573705, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745169514740573705, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1745169514740573707, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
       propertyPath: m_FontData.m_Alignment
