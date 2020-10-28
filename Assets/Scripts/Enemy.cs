@@ -92,8 +92,7 @@ public class Enemy : MonoBehaviour
             yield return laserSpawnRate;
             if (isAlive)
             {
-                _ = Laser.Init(laser, transform.position + new Vector3(-0.5f, -0.378f, 0), Quaternion.identity, Vector3.down, false);
-                _ = Laser.Init(laser, transform.position + new Vector3(0.5f, -0.378f, 0), Quaternion.identity, Vector3.down, false);
+                _ = Laser.Init(laser, transform.position + new Vector3(0.0f, -0.5f, 0), Quaternion.identity, Vector3.down, false);
             }
         }
 
