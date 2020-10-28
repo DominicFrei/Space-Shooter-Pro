@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    private readonly float _rotateSpeed = 3.0f;
-    [SerializeField] private GameObject _explosion = null;
-    private SpawnManager _spawnManager = null;
+    readonly float _rotateSpeed = 3.0f;
+    [SerializeField] GameObject _explosion = null;
+    SpawnManager _spawnManager = null;
 
-    private void Start()
+    void Start()
     {
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
@@ -17,7 +17,7 @@ public class Asteroid : MonoBehaviour
         transform.Rotate(new Vector3(0, 0, _rotateSpeed * Time.deltaTime));
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Laser"))
         {
@@ -30,7 +30,7 @@ public class Asteroid : MonoBehaviour
         }
     }
 
-    private IEnumerator StartSpawning()
+    IEnumerator StartSpawning()
     {
         yield return new WaitForSeconds(2.5f);
         if (null != _spawnManager)

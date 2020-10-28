@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private int _lifes = 3;
-    [SerializeField] private Laser laser = null;
-    [SerializeField] private bool _isTripleShotActive = false;
-    [SerializeField] private float _speedBoost = 1.0f;
-    [SerializeField] private bool _isShieldActive = false;
-    [SerializeField] private GameObject _shield = null;
-    [SerializeField] private UIManager _uiManager = null;
-    [SerializeField] private GameObject _rightEngine = null;
-    [SerializeField] private GameObject _leftEngine = null;
-    [SerializeField] private AudioClip _laserSoundClip = null;
-    [SerializeField] private AudioClip _powerUpSoundClip = null;
-    [SerializeField] private AudioSource _audioSource = null;
-    [SerializeField] private int playerId = default;
+    [SerializeField] int _lifes = 3;
+    [SerializeField] Laser laser = null;
+    [SerializeField] bool _isTripleShotActive = false;
+    [SerializeField] float _speedBoost = 1.0f;
+    [SerializeField] bool _isShieldActive = false;
+    [SerializeField] GameObject _shield = null;
+    [SerializeField] UIManager _uiManager = null;
+    [SerializeField] GameObject _rightEngine = null;
+    [SerializeField] GameObject _leftEngine = null;
+    [SerializeField] AudioClip _laserSoundClip = null;
+    [SerializeField] AudioClip _powerUpSoundClip = null;
+    [SerializeField] AudioSource _audioSource = null;
+    [SerializeField] int playerId = default;
 
-    [SerializeField, HideInInspector] private int _highscore = 0;
-    [NonSerialized] private int _score = 0;
+    int _score = 0;
+    int _highscore = 0;
+    float _timestampLastShot = 0.0f;
 
-    private readonly float _speed = 3.5f;
-    private readonly float _fireRate = 0.25f;
-    private float _timestampLastShot = 0.0f;
-
+    readonly float _speed = 3.5f;
+    readonly float _fireRate = 0.25f;
+    
     void Start()
     {
         if (!GameManager.IsMultiplayerSet)
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void UpdateMovement()
+    void UpdateMovement()
     {
         float boundsUpper = 0;
         float boundsLower = -4.5f;
@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void SpawnLaser()
+    void SpawnLaser()
     {
         bool inputSpacePressed = playerId == 1 ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown(KeyCode.Return);
         if (inputSpacePressed && _timestampLastShot + _fireRate < Time.time)
@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("TripleShotPowerUp"))
         {
@@ -212,13 +212,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerator DeactivateTripleShotPowerUp()
+    IEnumerator DeactivateTripleShotPowerUp()
     {
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
     }
 
-    private IEnumerator DeactivateSpeedPowerUp()
+    IEnumerator DeactivateSpeedPowerUp()
     {
         yield return new WaitForSeconds(5.0f);
         _speedBoost = 1.0f;

@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Player _player = default;
-    [SerializeField] private float _speed = 3.0f;
-    [SerializeField] private Animator _animator = default;
-    [SerializeField] private AudioSource _explosionAudio = default;
-    [SerializeField] private AudioClip _explosionAudioClip = default;
-    [SerializeField] private Laser laser = default;
+    [SerializeField] Player _player = default;
+    [SerializeField] float _speed = 3.0f;
+    [SerializeField] Animator _animator = default;
+    [SerializeField] AudioSource _explosionAudio = default;
+    [SerializeField] AudioClip _explosionAudioClip = default;
+    [SerializeField] Laser laser = default;
 
-    private bool isAlive = true;
-    private readonly float _boundsUpper = 6.2f;
-    private readonly float _boundsLower = -6.4f;
+    bool isAlive = true;
+    readonly float _boundsUpper = 6.2f;
+    readonly float _boundsLower = -6.4f;
 
-    private void Start()
+    void Start()
     {
         float newX = Random.Range(-8.0f, 8.0f);
         transform.position = new Vector3(newX, _boundsUpper, 0);
@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(SpawnLaser());
     }
 
-    private void Update()
+    void Update()
     {
 
         if (null == _player || null == _player.gameObject)
@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (isAlive && other.CompareTag("Player"))
         {

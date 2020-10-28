@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    [SerializeField] private float _speed = 3.0f;
-    private readonly float _boundsUpper = 6.2f;
-    private readonly float _boundsLower = -6.4f;
+    [SerializeField] float _speed = 3.0f;
+    readonly float _boundsUpper = 6.2f;
+    readonly float _boundsLower = -6.4f;
 
 
-    private void Start()
+    void Start()
     {
         float newX = Random.Range(-8.0f, 8.0f);
         transform.position = new Vector3(newX, _boundsUpper, 0);

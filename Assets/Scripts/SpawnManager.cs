@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private Player player1 = null;
-    [SerializeField] private Player player2 = null;
-    [SerializeField] private Enemy _enemy = null;
-    [SerializeField] private GameObject _enemyContainer = null;
-    [SerializeField] private GameObject[] _powerUps = null;
-    private readonly WaitForSeconds _delayEnemy = new WaitForSeconds(3.5f);
-    private readonly WaitForSeconds _delayPowerUp = new WaitForSeconds(10.0f);
+    [SerializeField] Player player1 = null;
+    [SerializeField] Player player2 = null;
+    [SerializeField] Enemy _enemy = null;
+    [SerializeField] GameObject _enemyContainer = null;
+    [SerializeField] GameObject[] _powerUps = null;
+    readonly WaitForSeconds _delayEnemy = new WaitForSeconds(3.5f);
+    readonly WaitForSeconds _delayPowerUp = new WaitForSeconds(10.0f);
 
     public void StartSpawning()
     {
@@ -17,7 +17,7 @@ public class SpawnManager : MonoBehaviour
         _ = StartCoroutine(SpawnPowerUp());
     }
 
-    private IEnumerator SpawnEnemies()
+    IEnumerator SpawnEnemies()
     {
         while (null != player1 && player1.IsAlive() || null != player2 && player2.IsAlive())
         {
@@ -27,7 +27,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private IEnumerator SpawnPowerUp()
+    IEnumerator SpawnPowerUp()
     {
         while (null != player1 && player1.IsAlive() || null != player2 && player2.IsAlive())
         {

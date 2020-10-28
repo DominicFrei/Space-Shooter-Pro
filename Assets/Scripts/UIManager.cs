@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Text _scoreText = null;
-    [SerializeField] private Text _highscoreText = null;
-    [SerializeField] private Sprite[] _sprites = null;
-    [SerializeField] private Image _lifes1 = null;
-    [SerializeField] private Image _lifes2 = null;
-    [SerializeField] private Text _gameOverText = null;
-    private bool _isGameOver = false;
-    private WaitForSeconds _gameOverFlickerDelay = new WaitForSeconds(0.25f);
+    [SerializeField] Text _scoreText = null;
+    [SerializeField] Text _highscoreText = null;
+    [SerializeField] Sprite[] _sprites = null;
+    [SerializeField] Image _lifes1 = null;
+    [SerializeField] Image _lifes2 = null;
+    [SerializeField] Text _gameOverText = null;
+    bool _isGameOver = false;
+    WaitForSeconds _gameOverFlickerDelay = new WaitForSeconds(0.25f);
 
-    private void Start()
+    void Start()
     {
         _scoreText.text = "Score: 0";
         _highscoreText.text = "Highscore: " + PlayerPrefs.GetInt("highscore");
@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private IEnumerator ShowGameOver()
+    IEnumerator ShowGameOver()
     {
         while (true)
         {
