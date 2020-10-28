@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] Text _scoreText = null;
-    [SerializeField] Text _highscoreText = null;
-    [SerializeField] Sprite[] _sprites = null;
-    [SerializeField] Image _lifes1 = null;
-    [SerializeField] Image _lifes2 = null;
-    [SerializeField] Text _gameOverText = null;
+    [SerializeField] Text _scoreText = default;
+    [SerializeField] Text _highscoreText = default;
+    [SerializeField] Sprite[] _sprites = default;
+    [SerializeField] Image _lifes1 = default;
+    [SerializeField] Image _lifes2 = default;
+    [SerializeField] Text _gameOverText = default;
     bool _isGameOver = false;
     WaitForSeconds _gameOverFlickerDelay = new WaitForSeconds(0.25f);
 

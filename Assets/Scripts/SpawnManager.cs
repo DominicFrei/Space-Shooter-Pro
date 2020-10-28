@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] Player player1 = null;
-    [SerializeField] Player player2 = null;
-    [SerializeField] Enemy _enemy = null;
-    [SerializeField] GameObject _enemyContainer = null;
-    [SerializeField] GameObject[] _powerUps = null;
+    [SerializeField] Player player1 = default;
+    [SerializeField] Player player2 = default;
+    [SerializeField] Enemy _enemy = default;
+    [SerializeField] GameObject _enemyContainer = default;
+    [SerializeField] GameObject[] _powerUps = default;
     readonly WaitForSeconds _delayEnemy = new WaitForSeconds(3.5f);
     readonly WaitForSeconds _delayPowerUp = new WaitForSeconds(10.0f);
 

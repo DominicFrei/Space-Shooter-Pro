@@ -5,17 +5,17 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] int _lifes = 3;
-    [SerializeField] Laser laser = null;
+    [SerializeField] Laser laser = default;
     [SerializeField] bool _isTripleShotActive = false;
     [SerializeField] float _speedBoost = 1.0f;
     [SerializeField] bool _isShieldActive = false;
-    [SerializeField] GameObject _shield = null;
-    [SerializeField] UIManager _uiManager = null;
-    [SerializeField] GameObject _rightEngine = null;
-    [SerializeField] GameObject _leftEngine = null;
-    [SerializeField] AudioClip _laserSoundClip = null;
-    [SerializeField] AudioClip _powerUpSoundClip = null;
-    [SerializeField] AudioSource _audioSource = null;
+    [SerializeField] GameObject _shield = default;
+    [SerializeField] UIManager _uiManager = default;
+    [SerializeField] GameObject _rightEngine = default;
+    [SerializeField] GameObject _leftEngine = default;
+    [SerializeField] AudioClip _laserSoundClip = default;
+    [SerializeField] AudioClip _powerUpSoundClip = default;
+    [SerializeField] AudioSource _audioSource = default;
     [SerializeField] int playerId = default;
 
     int _score = 0;
