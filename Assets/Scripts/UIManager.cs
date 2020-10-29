@@ -5,19 +5,24 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] Text _scoreText = default;
-    [SerializeField] Text _highscoreText = default;
+    [SerializeField] Text scoreText = default;
+    [SerializeField] Text highscoreText = default;
     [SerializeField] Sprite[] _sprites = default;
     [SerializeField] Image _lifes1 = default;
     [SerializeField] Image _lifes2 = default;
     [SerializeField] Text _gameOverText = default;
+
+    int score = 0;
+    int highscore = default;
     bool _isGameOver = false;
     WaitForSeconds _gameOverFlickerDelay = new WaitForSeconds(0.25f);
+    string highscoreKey = "highscore";
 
     void Start()
     {
-        _scoreText.text = "Score: 0";
-        _highscoreText.text = "Highscore: " + PlayerPrefs.GetInt("highscore");
+        highscore = PlayerPrefs.GetInt(highscoreKey);
+        scoreText.text = "Score: 0";
+        highscoreText.text = "Highscore: " + highscore;
         _gameOverText.gameObject.SetActive(false);
         if (!GameManager.IsMultiplayerSet)
         {
@@ -40,12 +45,20 @@ public class UIManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
+
+        scoreText.text = "Score: " + score;
+
+        if (score > highscore)
+        {
+            highscore = score;
+            highscoreText.text = "Highscore: " + highscore;
+            PlayerPrefs.SetInt(highscoreKey, highscore);
+        }
     }
 
-    public void UpdateScore(int score, int highscore)
+    public void IncreaseScore()
     {
-        _scoreText.text = "Score: " + score;
-        _highscoreText.text = "Highscore: " + highscore;
+        score += 10;
     }
 
     public void UpdateLives(int playerId, int lives)

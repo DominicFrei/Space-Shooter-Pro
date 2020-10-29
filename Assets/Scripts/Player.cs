@@ -1,30 +1,29 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] int _lifes = 3;
-    [SerializeField] Laser laser = default;
-    [SerializeField] bool _isTripleShotActive = false;
-    [SerializeField] float _speedBoost = 1.0f;
-    [SerializeField] bool _isShieldActive = false;
-    [SerializeField] GameObject _shield = default;
-    [SerializeField] UIManager _uiManager = default;
-    [SerializeField] GameObject _rightEngine = default;
-    [SerializeField] GameObject _leftEngine = default;
-    [SerializeField] AudioClip _laserSoundClip = default;
-    [SerializeField] AudioClip _powerUpSoundClip = default;
-    [SerializeField] AudioSource _audioSource = default;
     [SerializeField] int playerId = default;
 
-    int _score = 0;
-    int _highscore = 0;
-    float _timestampLastShot = 0.0f;
+    [SerializeField] UIManager uiManager = default;
+        
+    [SerializeField] GameObject rightEngine = default;
+    [SerializeField] GameObject leftEngine = default;
+    [SerializeField] Laser laser = default;
+    [SerializeField] GameObject shield = default;
 
+    [SerializeField] AudioSource audioSource = default;
+    [SerializeField] AudioClip laserSoundClip = default;
+    [SerializeField] AudioClip powerUpSoundClip = default;
+
+    int _lifes = 3;
     readonly float _speed = 3.5f;
     readonly float _fireRate = 0.25f;
-    
+    float _speedBoost = 1.0f; 
+    float _timestampLastShot = 0.0f;    
+    bool _isTripleShotActive = false;
+    bool _isShieldActive = false;    
+
     void Start()
     {
         if (!GameManager.IsMultiplayerSet)
@@ -125,26 +124,26 @@ public class Player : MonoBehaviour
         if (_isShieldActive)
         {
             _isShieldActive = false;
-            _shield.SetActive(false);
+            shield.SetActive(false);
         }
         else
         {
             _lifes -= 1;
-            _uiManager.UpdateLives(playerId, _lifes);
+            uiManager.UpdateLives(playerId, _lifes);
         }
         switch (_lifes)
         {
             case 3:
-                _rightEngine.SetActive(false);
-                _leftEngine.SetActive(false);
+                rightEngine.SetActive(false);
+                leftEngine.SetActive(false);
                 break;
             case 2:
-                _rightEngine.SetActive(true);
-                _leftEngine.SetActive(false);
+                rightEngine.SetActive(true);
+                leftEngine.SetActive(false);
                 break;
             case 1:
-                _rightEngine.SetActive(true);
-                _leftEngine.SetActive(true);
+                rightEngine.SetActive(true);
+                leftEngine.SetActive(true);
                 break;
             case 0:
                 GameManager.isOnePlayerDead = true;
@@ -170,8 +169,8 @@ public class Player : MonoBehaviour
             }
             _timestampLastShot = Time.time;
 
-            _audioSource.clip = _laserSoundClip;
-            _audioSource.Play();
+            audioSource.clip = laserSoundClip;
+            audioSource.Play();
         }
     }
 
@@ -180,26 +179,26 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("TripleShotPowerUp"))
         {
             _isTripleShotActive = true;
-            _audioSource.clip = _powerUpSoundClip;
-            _audioSource.Play();
+            audioSource.clip = powerUpSoundClip;
+            audioSource.Play();
             Destroy(collision.gameObject);
             StartCoroutine(DeactivateTripleShotPowerUp());
         }
         else if (collision.CompareTag("SpeedPowerUp"))
         {
             _speedBoost = 2.0f;
-            _audioSource.clip = _powerUpSoundClip;
-            _audioSource.Play();
+            audioSource.clip = powerUpSoundClip;
+            audioSource.Play();
             Destroy(collision.gameObject);
             StartCoroutine(DeactivateSpeedPowerUp());
         }
         else if (collision.CompareTag("ShieldPowerUp"))
         {
             _isShieldActive = true;
-            _audioSource.clip = _powerUpSoundClip;
-            _audioSource.Play();
+            audioSource.clip = powerUpSoundClip;
+            audioSource.Play();
             Destroy(collision.gameObject);
-            _shield.SetActive(true);
+            shield.SetActive(true);
         }
         else if (collision.CompareTag("Laser"))
         {
@@ -226,12 +225,7 @@ public class Player : MonoBehaviour
 
     public void EnemyKilled()
     {
-        _score += 10;
-        _highscore = Math.Max(_highscore, _score);
-        PlayerPrefs.SetInt("highscore", _highscore);
-
-        UIManager uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-        uiManager.UpdateScore(_score, _highscore);
+        uiManager.IncreaseScore();
     }
 
 }
