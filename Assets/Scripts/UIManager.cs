@@ -7,15 +7,16 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] Text scoreText = default;
     [SerializeField] Text highscoreText = default;
-    [SerializeField] Sprite[] _sprites = default;
-    [SerializeField] Image _lifes1 = default;
-    [SerializeField] Image _lifes2 = default;
-    [SerializeField] Text _gameOverText = default;
+    [SerializeField] Sprite[] lifeIndicatorSprites = default;
+    [SerializeField] Image lifeIndicatorPlayer1 = default;
+    [SerializeField] Image liveIndicatorPlayer2 = default;
+    [SerializeField] Text gameOverText = default;
 
-    int score = 0;
+    static int score = 0;
+
     int highscore = default;
-    bool _isGameOver = false;
-    WaitForSeconds _gameOverFlickerDelay = new WaitForSeconds(0.25f);
+    bool isGameOver = false;
+    WaitForSeconds gameOverFlickerDelay = new WaitForSeconds(0.25f);
     string highscoreKey = "highscore";
 
     void Start()
@@ -23,10 +24,10 @@ public class UIManager : MonoBehaviour
         highscore = PlayerPrefs.GetInt(highscoreKey);
         scoreText.text = "Score: 0";
         highscoreText.text = "Highscore: " + highscore;
-        _gameOverText.gameObject.SetActive(false);
+        gameOverText.gameObject.SetActive(false);
         if (!GameManager.IsMultiplayerSet)
         {
-            _lifes2.gameObject.SetActive(false);
+            liveIndicatorPlayer2.gameObject.SetActive(false);
         }
     }
 
@@ -37,7 +38,7 @@ public class UIManager : MonoBehaviour
             Application.Quit();
         }
 
-        if (_isGameOver)
+        if (isGameOver)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -58,7 +59,7 @@ public class UIManager : MonoBehaviour
 
     public void IncreaseScore()
     {
-        score += 10;
+        score += 10;        
     }
 
     public void UpdateLives(int playerId, int lives)
@@ -71,16 +72,16 @@ public class UIManager : MonoBehaviour
         {
             if (playerId == 1)
             {
-                _lifes1.sprite = _sprites[lives];
+                lifeIndicatorPlayer1.sprite = lifeIndicatorSprites[lives];
             }
             else
             {
-                _lifes2.sprite = _sprites[lives];
+                liveIndicatorPlayer2.sprite = lifeIndicatorSprites[lives];
             }
 
             if (0 == lives)
             {
-                _isGameOver = true;
+                isGameOver = true;
                 StartCoroutine(ShowGameOver());
             }
         }
@@ -90,8 +91,8 @@ public class UIManager : MonoBehaviour
     {
         while (true)
         {
-            _gameOverText.gameObject.SetActive(!_gameOverText.gameObject.activeSelf);
-            yield return _gameOverFlickerDelay;
+            gameOverText.gameObject.SetActive(!gameOverText.gameObject.activeSelf);
+            yield return gameOverFlickerDelay;
         }
     }
 }
