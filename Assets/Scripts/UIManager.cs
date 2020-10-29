@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text highscoreText = default;
     [SerializeField] Sprite[] lifeIndicatorSprites = default;
     [SerializeField] Image lifeIndicatorPlayer1 = default;
-    [SerializeField] Image liveIndicatorPlayer2 = default;
+    [SerializeField] Image lifeIndicatorPlayer2 = default;
     [SerializeField] Text gameOverText = default;
 
     static int score = 0;
@@ -25,9 +25,16 @@ public class UIManager : MonoBehaviour
         scoreText.text = "Score: 0";
         highscoreText.text = "Highscore: " + highscore;
         gameOverText.gameObject.SetActive(false);
+
+        UpdateLives(1, 3);
+
         if (!GameManager.IsMultiplayerSet)
         {
-            liveIndicatorPlayer2.gameObject.SetActive(false);
+            lifeIndicatorPlayer2.gameObject.SetActive(false);
+        }
+        else
+        {
+            UpdateLives(2, 3);
         }
     }
 
@@ -76,7 +83,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                liveIndicatorPlayer2.sprite = lifeIndicatorSprites[lives];
+                lifeIndicatorPlayer2.sprite = lifeIndicatorSprites[lives];
             }
 
             if (0 == lives)
