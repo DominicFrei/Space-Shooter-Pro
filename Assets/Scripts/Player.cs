@@ -5,8 +5,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField] int playerId = default;
 
-    [SerializeField] UIManager uiManager = default;
-        
     [SerializeField] GameObject rightEngine = default;
     [SerializeField] GameObject leftEngine = default;
     [SerializeField] Laser laser = default;
@@ -16,16 +14,19 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip laserSoundClip = default;
     [SerializeField] AudioClip powerUpSoundClip = default;
 
+    UIManager uiManager = default;
+
     int _lifes = 3;
     readonly float _speed = 3.5f;
     readonly float _fireRate = 0.25f;
-    float _speedBoost = 1.0f; 
-    float _timestampLastShot = 0.0f;    
+    float _speedBoost = 1.0f;
+    float _timestampLastShot = 0.0f;
     bool _isTripleShotActive = false;
-    bool _isShieldActive = false;    
+    bool _isShieldActive = false;
 
     void Start()
     {
+        uiManager = GameObject.FindObjectOfType<UIManager>();
         if (!GameManager.IsMultiplayerSet)
         {
             if (1 == playerId)
