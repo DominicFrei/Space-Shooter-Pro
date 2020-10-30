@@ -290,6 +290,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1745169513874611148, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
+      propertyPath: m_TagString
+      value: UIManager
+      objectReference: {fileID: 0}
     - target: {fileID: 1745169513874611191, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -10,6 +10,7 @@ TagManager:
   - TripleShotPowerUp
   - SpeedPowerUp
   - ShieldPowerUp
+  - UIManager
   layers:
   - Default
   - TransparentFX

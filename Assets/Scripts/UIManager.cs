@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 GameManager.isOnePlayerDead = false;
+                score = 0;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }

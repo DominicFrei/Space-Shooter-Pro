@@ -408,11 +408,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 0
-  uiManager: {fileID: 1745169513874611187, guid: c4b737e17fa5c044b9df72a0ba152d48, type: 3}
   rightEngine: {fileID: 1012227059}
   leftEngine: {fileID: 116372965}
   laser: {fileID: 3638303841597702479, guid: aa4ef9e121225c54eac1a7e77ba5eb75, type: 3}
-  shield: {fileID: 2709892578989147302, guid: 6b37714c7b5e14d488a36be0b7cb3ea4, type: 3}
+  shield: {fileID: 8369934352895741260}
   audioSource: {fileID: 7862749254228680599}
   laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   powerUpSoundClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
@@ -620,6 +619,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6515946743458392590, guid: 6b37714c7b5e14d488a36be0b7cb3ea4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6b37714c7b5e14d488a36be0b7cb3ea4, type: 3}
+--- !u!1 &8369934352895741260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2709892578989147302, guid: 6b37714c7b5e14d488a36be0b7cb3ea4, type: 3}
+  m_PrefabInstance: {fileID: 5889725365842938346}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8369934352895741263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2709892578989147301, guid: 6b37714c7b5e14d488a36be0b7cb3ea4, type: 3}

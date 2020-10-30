@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip laserSoundClip = default;
     [SerializeField] AudioClip powerUpSoundClip = default;
 
-    UIManager uiManager = default;
+    static UIManager uiManager = default;
 
     int _lifes = 3;
     readonly float _speed = 3.5f;
@@ -24,9 +25,18 @@ public class Player : MonoBehaviour
     bool _isTripleShotActive = false;
     bool _isShieldActive = false;
 
-    void Start()
+    private void Awake()
+    {
+        SceneManager.sceneLoaded += SceneLoaded;
+    }
+
+    void SceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
         uiManager = GameObject.FindObjectOfType<UIManager>();
+    }
+
+    void Start()
+    {
         if (!GameManager.IsMultiplayerSet)
         {
             if (1 == playerId)
@@ -130,7 +140,14 @@ public class Player : MonoBehaviour
         else
         {
             _lifes -= 1;
-            uiManager.UpdateLives(playerId, _lifes);
+            if (uiManager)
+            {
+                uiManager.UpdateLives(playerId, _lifes);
+            }
+            else
+            {
+                Debug.Log("uiManager must not be null.");
+            }
         }
         switch (_lifes)
         {
@@ -226,7 +243,14 @@ public class Player : MonoBehaviour
 
     public void EnemyKilled()
     {
-        uiManager.IncreaseScore();
+        if (uiManager)
+        {
+            uiManager.IncreaseScore();
+        }
+        else
+        {
+            Debug.Log("uiManager must not be null.");
+        }        
     }
 
 }
