@@ -4,13 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    [Tooltip("The two players must have the ids 1 and 2.")]
     [SerializeField] int playerId = default;
 
+    [Tooltip("This is the rightEngine GameObject child of this player GameObject.")]
     [SerializeField] GameObject rightEngine = default;
+    [Tooltip("This is the leftEngine GameObject child of this player GameObject.")]
     [SerializeField] GameObject leftEngine = default;
+    [Tooltip("This is the laser GameObject child of this player GameObject.")]
     [SerializeField] Laser laser = default;
+    [Tooltip("This is the shield GameObject child of this player GameObject.")]
     [SerializeField] GameObject shield = default;
 
+    [Tooltip("This is the audioSource GameObject child of this player GameObject.")]
     [SerializeField] AudioSource audioSource = default;
     [SerializeField] AudioClip laserSoundClip = default;
     [SerializeField] AudioClip powerUpSoundClip = default;
@@ -250,7 +256,7 @@ public class Player : MonoBehaviour
         else
         {
             Debug.Log("uiManager must not be null.");
-        }        
+        }
     }
 
 }

@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image lifeIndicatorPlayer2 = default;
     [SerializeField] Text gameOverText = default;
 
-    static int score = 0;
+    int score = 0;
 
     int highscore = default;
     bool isGameOver = false;
